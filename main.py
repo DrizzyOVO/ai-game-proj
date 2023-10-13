@@ -30,6 +30,13 @@ zebra.shape('zebra_crossing_6.gif')
 zebra.penup()
 zebra.goto(300, -45)
 
+tut_list = [Player, Ai]
+
+win_loose = Turtle()
+win_loose.goto(0, 0)
+win_loose.hideturtle()
+win_loose.penup()
+
 
 def draw_onclick(x, y):
     if turntext.turn == "Your turn":
@@ -43,17 +50,37 @@ def draw_onclick(x, y):
         time.sleep(1)
         dicetext1.clear()
         turntext.r_point()
+
+        if Player.xcor() >= 250:
+            win_loose.write("You win!!!", align="center", font=("courier", 50, "normal"))
+            screen.exitonclick()
+        elif Ai.xcor() >= 250:
+            win_loose.write("You loose:(", align="center", font=("courier", 50, "normal"))
+            screen.exitonclick()
+        else:
+            rand_dist2 = random.randint(1, 6)
+            dicetext1 = Turtle()
+            dicetext1.penup()
+            dicetext1.goto(0, 80)
+            dicetext1.hideturtle()
+            dicetext1.write(rand_dist2, align="center", font=('Arial', 12, 'bold'))
+            Ai.forward(rand_dist2 * 25)
+            time.sleep(1)
+            dicetext1.clear()
+            turntext.l_point()
+
+
         """Ai's turn"""
-        rand_dist2 = random.randint(1, 6)
-        dicetext1 = Turtle()
-        dicetext1.penup()
-        dicetext1.goto(0, 80)
-        dicetext1.hideturtle()
-        dicetext1.write(rand_dist2, align="center", font=('Arial', 12, 'bold'))
-        Ai.forward(rand_dist2*25)
-        time.sleep(1)
-        dicetext1.clear()
-        turntext.l_point()
+        # rand_dist2 = random.randint(1, 6)
+        # dicetext1 = Turtle()
+        # dicetext1.penup()
+        # dicetext1.goto(0, 80)
+        # dicetext1.hideturtle()
+        # dicetext1.write(rand_dist2, align="center", font=('Arial', 12, 'bold'))
+        # Ai.forward(rand_dist2*25)
+        # time.sleep(1)
+        # dicetext1.clear()
+        # turntext.l_point()
 
 
 button = Turtle()
@@ -70,17 +97,15 @@ button.showturtle()
 turtle = Turtle()
 turtle.hideturtle()
 
-tut_list = [Player, Ai]
-
-while is_on:
-    for turtle in tut_list:
-        if turtle.xcor() >= 250:
-            is_race_on = False
-            winning_turtle = tut_list.index(turtle)
-            if winning_turtle == 0:
-                print(f"You win!!!")
-            else:
-                print(f"You loose:(")
+# while is_on:
+#     for turtle in tut_list:
+#         if turtle.xcor() >= 250:
+#             is_race_on = False
+#             winning_turtle = tut_list.index(turtle)
+#             if winning_turtle == 0:
+#                 print(f"You win!!!")
+#             else:
+#                 print(f"You loose:(")
 
 # if not is_on:
 #     screen.exitonclick()
